@@ -8,48 +8,45 @@
  */
 template <typename ELEM_TYPE, typename TRAITS_TYPE>
 class basic_isubstream
-  : public std::basic_istream<ELEM_TYPE, TRAITS_TYPE>
+	: public std::basic_istream<ELEM_TYPE, TRAITS_TYPE>
 {
-  public:
-    typedef typename std::basic_istream<ELEM_TYPE, TRAITS_TYPE>::pos_type pos_type;
+public:
+	typedef typename std::basic_istream<ELEM_TYPE, TRAITS_TYPE>::pos_type pos_type;
 
-    basic_isubstream()
-      : std::basic_istream<ELEM_TYPE, TRAITS_TYPE>(&_subStreambuf)
-    {
+	basic_isubstream()
+		: std::basic_istream<ELEM_TYPE, TRAITS_TYPE>(&_subStreambuf)
+	{
+	}
 
-    }
+	basic_isubstream(std::basic_istream<ELEM_TYPE, TRAITS_TYPE>& input, pos_type startOffset = 0)
+		: std::basic_istream<ELEM_TYPE, TRAITS_TYPE>(&_subStreambuf)
+		, _subStreambuf(input, startOffset, static_cast<size_t>(-1))
+	{
+	}
 
-    basic_isubstream(std::basic_istream<ELEM_TYPE, TRAITS_TYPE>& input, pos_type startOffset = 0)
-      : std::basic_istream<ELEM_TYPE, TRAITS_TYPE>(&_subStreambuf)
-      , _subStreambuf(input, startOffset, static_cast<size_t>(-1))
-    {
+	basic_isubstream(std::basic_istream<ELEM_TYPE, TRAITS_TYPE>& input, pos_type startOffset, size_t length)
+		: std::basic_istream<ELEM_TYPE, TRAITS_TYPE>(&_subStreambuf)
+		, _subStreambuf(input, startOffset, length)
+	{
+	}
 
-    }
+	void init(std::basic_istream<ELEM_TYPE, TRAITS_TYPE>& input, pos_type startOffset = 0)
+	{
+		_subStreambuf.init(input, startOffset, static_cast<size_t>(-1));
+	}
 
-    basic_isubstream(std::basic_istream<ELEM_TYPE, TRAITS_TYPE>& input, pos_type startOffset, size_t length)
-      : std::basic_istream<ELEM_TYPE, TRAITS_TYPE>(&_subStreambuf)
-      , _subStreambuf(input, startOffset, length)
-    {
+	void init(std::basic_istream<ELEM_TYPE, TRAITS_TYPE>& input, pos_type startOffset, size_t length)
+	{
+		_subStreambuf.init(input, startOffset, length);
+	}
 
-    }
+	bool is_init() const
+	{
+		return _subStreambuf.is_init();
+	}
 
-    void init(std::basic_istream<ELEM_TYPE, TRAITS_TYPE>& input, pos_type startOffset = 0)
-    {
-      _subStreambuf.init(input, startOffset, static_cast<size_t>(-1));
-    }
-
-    void init(std::basic_istream<ELEM_TYPE, TRAITS_TYPE>& input, pos_type startOffset, size_t length)
-    {
-      _subStreambuf.init(input, startOffset, length);
-    }
-
-    bool is_init() const
-    {
-      return _subStreambuf.is_init();
-    }
-
-  private:
-    sub_streambuf<ELEM_TYPE, TRAITS_TYPE> _subStreambuf;
+private:
+	sub_streambuf<ELEM_TYPE, TRAITS_TYPE> _subStreambuf;
 };
 
 //////////////////////////////////////////////////////////////////////////

@@ -6,18 +6,18 @@
 #include <memory>
 
 class StoreMethod :
-  public ICompressionMethod
+	public ICompressionMethod
 {
-  public:
-    ZIP_METHOD_CLASS_PROLOGUE(
-      StoreMethod,
-      store_encoder, store_decoder,
-      _encoderProps, _decoderProps,
-      /* CompressionMethod */ 0,
-      /* VersionNeededToExtract */ 10
-    );
+public:
+	ZIP_METHOD_CLASS_PROLOGUE(
+		StoreMethod,
+		store_encoder, store_decoder,
+		_encoderProps, _decoderProps,
+		/* CompressionMethod */ 0,
+		/* VersionNeededToExtract */ 10
+	);
 
-  private:
-    store_encoder_properties _encoderProps;
-    store_decoder_properties _decoderProps;
+private:
+	store_encoder_properties _encoderProps;
+	store_decoder_properties _decoderProps;
 };

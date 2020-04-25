@@ -11,25 +11,23 @@
  */
 template <typename ELEM_TYPE, typename TRAITS_TYPE>
 class basic_imemstream
-  : public std::basic_istream<ELEM_TYPE, TRAITS_TYPE>
+	: public std::basic_istream<ELEM_TYPE, TRAITS_TYPE>
 {
-  public:
-    basic_imemstream(ELEM_TYPE* buffer, size_t length)
-      : std::basic_istream<ELEM_TYPE, TRAITS_TYPE>(&_memStreambuf)
-      , _memStreambuf(buffer, length)
-    {
+public:
+	basic_imemstream(ELEM_TYPE* buffer, size_t length)
+		: std::basic_istream<ELEM_TYPE, TRAITS_TYPE>(&_memStreambuf)
+		, _memStreambuf(buffer, length)
+	{
+	}
 
-    }
+	template <size_t N>
+	basic_imemstream(ELEM_TYPE(&buffer)[N])
+		: basic_imemstream(buffer, N)
+	{
+	}
 
-    template <size_t N>
-    basic_imemstream(ELEM_TYPE (&buffer)[N])
-      : basic_imemstream(buffer, N)
-    {
-
-    }
-
-  private:
-    mem_streambuf<ELEM_TYPE, TRAITS_TYPE> _memStreambuf;
+private:
+	mem_streambuf<ELEM_TYPE, TRAITS_TYPE> _memStreambuf;
 };
 
 /**
@@ -40,26 +38,24 @@ class basic_imemstream
  */
 template <typename ELEM_TYPE, typename TRAITS_TYPE>
 class basic_omemstream
-  : public std::basic_ostream<ELEM_TYPE, TRAITS_TYPE>
+	: public std::basic_ostream<ELEM_TYPE, TRAITS_TYPE>
 {
-  public:
-    basic_omemstream(ELEM_TYPE* buffer, size_t length)
-      : _memStreambuf(buffer, length)
-      , std::basic_ostream<ELEM_TYPE, TRAITS_TYPE>(&_memStreambuf)
-    {
+public:
+	basic_omemstream(ELEM_TYPE* buffer, size_t length)
+		: _memStreambuf(buffer, length)
+		, std::basic_ostream<ELEM_TYPE, TRAITS_TYPE>(&_memStreambuf)
+	{
+	}
 
-    }
+	template <size_t N>
+	basic_omemstream(ELEM_TYPE(&buffer)[N])
+		: _memStreambuf(buffer, N)
+		, std::basic_ostream<ELEM_TYPE, TRAITS_TYPE>(&_memStreambuf)
+	{
+	}
 
-    template <size_t N>
-    basic_omemstream(ELEM_TYPE (&buffer)[N])
-      : _memStreambuf(buffer, N)
-      , std::basic_ostream<ELEM_TYPE, TRAITS_TYPE>(&_memStreambuf)
-    {
-
-    }
-
-  private:
-    mem_streambuf<ELEM_TYPE, TRAITS_TYPE> _memStreambuf;
+private:
+	mem_streambuf<ELEM_TYPE, TRAITS_TYPE> _memStreambuf;
 };
 
 /**
@@ -72,26 +68,24 @@ class basic_omemstream
  */
 template <typename ELEM_TYPE, typename TRAITS_TYPE>
 class basic_iomemstream
-  : public std::basic_iostream<ELEM_TYPE, TRAITS_TYPE>
+	: public std::basic_iostream<ELEM_TYPE, TRAITS_TYPE>
 {
-  public:
-    basic_iomemstream(ELEM_TYPE* buffer, size_t length)
-      : _memStreambuf(buffer, length)
-      , std::basic_iostream<ELEM_TYPE, TRAITS_TYPE>(&_memStreambuf)
-    {
+public:
+	basic_iomemstream(ELEM_TYPE* buffer, size_t length)
+		: _memStreambuf(buffer, length)
+		, std::basic_iostream<ELEM_TYPE, TRAITS_TYPE>(&_memStreambuf)
+	{
+	}
 
-    }
+	template <size_t N>
+	basic_iomemstream(ELEM_TYPE(&buffer)[N])
+		: _memStreambuf(buffer, N)
+		, std::basic_iostream<ELEM_TYPE, TRAITS_TYPE>(&_memStreambuf)
+	{
+	}
 
-    template <size_t N>
-    basic_iomemstream(ELEM_TYPE (&buffer)[N])
-      : _memStreambuf(buffer, N)
-      , std::basic_iostream<ELEM_TYPE, TRAITS_TYPE>(&_memStreambuf)
-    {
-
-    }
-
-  private:
-    mem_streambuf<ELEM_TYPE, TRAITS_TYPE> _memStreambuf;
+private:
+	mem_streambuf<ELEM_TYPE, TRAITS_TYPE> _memStreambuf;
 };
 
 //////////////////////////////////////////////////////////////////////////

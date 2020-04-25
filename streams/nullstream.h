@@ -8,17 +8,16 @@
  */
 template <typename ELEM_TYPE, typename TRAITS_TYPE>
 class basic_nullstream
-  : public std::basic_iostream<ELEM_TYPE, TRAITS_TYPE>
+	: public std::basic_iostream<ELEM_TYPE, TRAITS_TYPE>
 {
-  public:
-    basic_nullstream()
-      : std::basic_iostream<ELEM_TYPE, TRAITS_TYPE>(&_nullStreambuf)
-    {
+public:
+	basic_nullstream()
+		: std::basic_iostream<ELEM_TYPE, TRAITS_TYPE>(&_nullStreambuf)
+	{
+	}
 
-    }
-
-  private:
-    null_streambuf<ELEM_TYPE, TRAITS_TYPE> _nullStreambuf;
+private:
+	null_streambuf<ELEM_TYPE, TRAITS_TYPE> _nullStreambuf;
 };
 
 //////////////////////////////////////////////////////////////////////////

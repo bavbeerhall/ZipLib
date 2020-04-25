@@ -4,18 +4,16 @@
 #include <algorithm>
 
 struct store_encoder_properties
-  : compression_encoder_properties_interface
+	: compression_encoder_properties_interface
 {
-  store_encoder_properties()
-    : BufferCapacity(1 << 15)
-  {
+	store_encoder_properties()
+		: BufferCapacity(1 << 15)
+	{
+	}
 
-  }
+	void normalize() override
+	{
+	}
 
-  void normalize() override
-  {
-
-  }
-
-  size_t BufferCapacity;
+	size_t BufferCapacity;
 };

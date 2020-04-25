@@ -20,11 +20,11 @@
 
 struct ZipMethodResolver
 {
-  static ICompressionMethod::Ptr GetZipMethodInstance(uint16_t compressionMethod)
-  {
-    ZIP_METHOD_TABLE;
-    return ICompressionMethod::Ptr();
-  }
+	static ICompressionMethod::Ptr GetZipMethodInstance(uint16_t compressionMethod)
+	{
+		ZIP_METHOD_TABLE;
+		return ICompressionMethod::Ptr();
+	}
 };
 
 #undef ZIP_METHOD

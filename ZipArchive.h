@@ -14,149 +14,149 @@
  */
 class ZipArchive
 {
-  friend class ZipFile;
-  friend class ZipArchiveEntry;
+	friend class ZipFile;
+	friend class ZipArchiveEntry;
 
-  public:
-    typedef std::shared_ptr<ZipArchive> Ptr;
+public:
+	typedef std::shared_ptr<ZipArchive> Ptr;
 
-    /**
-     * \brief Default constructor.
-     */
-    static ZipArchive::Ptr Create();
+	/**
+	 * \brief Default constructor.
+	 */
+	static ZipArchive::Ptr Create();
 
-    /**
-     * \brief Move constructor.
-     *
-     * \param other The ZipArchive instance to move.
-     */
-    static ZipArchive::Ptr Create(ZipArchive::Ptr&& other);
-    
-    /**
-     * \brief Constructor.
-     *
-     * \param stream The input stream of the zip archive content. Must be seekable.
-     */
-    static ZipArchive::Ptr Create(std::istream& stream);
+	/**
+	 * \brief Move constructor.
+	 *
+	 * \param other The ZipArchive instance to move.
+	 */
+	static ZipArchive::Ptr Create(ZipArchive::Ptr&& other);
 
-    /**
-     * \brief Constructor. It optionally allows to simultaneously destroy and dealloc the input stream
-     *        with the ZipArchive.
-     *
-     * \param stream                The input stream of the zip archive content. Must be seekable.
-     * \param takeOwnership         If true, it calls "delete stream" in the ZipArchive destructor.
-     */
-    static ZipArchive::Ptr Create(std::istream* stream, bool takeOwnership);
+	/**
+	 * \brief Constructor.
+	 *
+	 * \param stream The input stream of the zip archive content. Must be seekable.
+	 */
+	static ZipArchive::Ptr Create(std::istream& stream);
 
-    /**
-     * \brief Destructor.
-     */
-    ~ZipArchive();
+	/**
+	 * \brief Constructor. It optionally allows to simultaneously destroy and dealloc the input stream
+	 *        with the ZipArchive.
+	 *
+	 * \param stream                The input stream of the zip archive content. Must be seekable.
+	 * \param takeOwnership         If true, it calls "delete stream" in the ZipArchive destructor.
+	 */
+	static ZipArchive::Ptr Create(std::istream* stream, bool takeOwnership);
 
-    /**
-     * \brief Move assignment operator.
-     *
-     * \param other The ZipArchive instance to move.
-     *
-     * \return  A shallow copy of this object.
-     */
-    ZipArchive& operator = (ZipArchive&& other);
+	/**
+	 * \brief Destructor.
+	 */
+	~ZipArchive();
 
-    /**
-     * \brief Creates an zip entry with given file name.
-     *
-     * \param fileName  Filename of the file.
-     *
-     * \return  nullptr if it fails, else the new entry.
-     */
-    ZipArchiveEntry::Ptr CreateEntry(const std::string& fileName);
+	/**
+	 * \brief Move assignment operator.
+	 *
+	 * \param other The ZipArchive instance to move.
+	 *
+	 * \return  A shallow copy of this object.
+	 */
+	ZipArchive& operator = (ZipArchive&& other);
 
-    /**
-     * \brief Gets the comment of the zip archive.
-     *
-     * \return  The comment.
-     */
-    const std::string& GetComment() const;
+	/**
+	 * \brief Creates an zip entry with given file name.
+	 *
+	 * \param fileName  Filename of the file.
+	 *
+	 * \return  nullptr if it fails, else the new entry.
+	 */
+	ZipArchiveEntry::Ptr CreateEntry(const std::string& fileName);
 
-    /**
-     * \brief Sets a comment of the zip archive.
-     *
-     * \param comment The comment.
-     */
-    void SetComment(const std::string& comment);
+	/**
+	 * \brief Gets the comment of the zip archive.
+	 *
+	 * \return  The comment.
+	 */
+	const std::string& GetComment() const;
 
-    /**
-     * \brief Gets a pointer to the zip entry located on the given index.
-     *
-     * \param index Zero-based index of the.
-     *
-     * \return  null if it fails, else the entry.
-     */
-    ZipArchiveEntry::Ptr GetEntry(int index);
+	/**
+	 * \brief Sets a comment of the zip archive.
+	 *
+	 * \param comment The comment.
+	 */
+	void SetComment(const std::string& comment);
 
-    /**
-     * \brief Gets a const pointer to the zip entry with given file name.
-     *
-     * \param entryName Name of the entry.
-     *
-     * \return  null if it fails, else the entry.
-     */
-    ZipArchiveEntry::Ptr GetEntry(const std::string& entryName);
+	/**
+	 * \brief Gets a pointer to the zip entry located on the given index.
+	 *
+	 * \param index Zero-based index of the.
+	 *
+	 * \return  null if it fails, else the entry.
+	 */
+	ZipArchiveEntry::Ptr GetEntry(int index);
 
-    /**
-     * \brief Gets the number of the zip entries in this archive.
-     *
-     * \return  The number of the zip entries in this archive.
-     */
-    size_t GetEntriesCount() const;
+	/**
+	 * \brief Gets a const pointer to the zip entry with given file name.
+	 *
+	 * \param entryName Name of the entry.
+	 *
+	 * \return  null if it fails, else the entry.
+	 */
+	ZipArchiveEntry::Ptr GetEntry(const std::string& entryName);
 
-    /**
-     * \brief Removes the entry by the file name.
-     *
-     * \param entryName Name of the entry.
-     */
-    void RemoveEntry(const std::string& entryName);
+	/**
+	 * \brief Gets the number of the zip entries in this archive.
+	 *
+	 * \return  The number of the zip entries in this archive.
+	 */
+	size_t GetEntriesCount() const;
 
-    /**
-    * \brief Removes the entry by the index.
-     *
-     * \param index Zero-based index of the.
-     */
-    void RemoveEntry(int index);
+	/**
+	 * \brief Removes the entry by the file name.
+	 *
+	 * \param entryName Name of the entry.
+	 */
+	void RemoveEntry(const std::string& entryName);
 
-    /**
-     * \brief Writes the zip archive content to the stream. It must be seekable.
-     *
-     * \param stream The stream to write in.
-     */
-    void WriteToStream(std::ostream& stream);
+	/**
+	* \brief Removes the entry by the index.
+	 *
+	 * \param index Zero-based index of the.
+	 */
+	void RemoveEntry(int index);
 
-    /**
-     * \brief Swaps this instance of ZipArchive with another instance.
-     *
-     * \param other The instance to swap with.
-     */
-    void Swap(ZipArchive::Ptr other);
+	/**
+	 * \brief Writes the zip archive content to the stream. It must be seekable.
+	 *
+	 * \param stream The stream to write in.
+	 */
+	void WriteToStream(std::ostream& stream);
 
-  private:
-    ZipArchive();
-    ZipArchive(const ZipArchive&);
-    ZipArchive& operator = (const ZipArchive& other);
+	/**
+	 * \brief Swaps this instance of ZipArchive with another instance.
+	 *
+	 * \param other The instance to swap with.
+	 */
+	void Swap(ZipArchive::Ptr other);
 
-    enum class SeekDirection
-    {
-      Forward,
-      Backward
-    };
+private:
+	ZipArchive();
+	ZipArchive(const ZipArchive&);
+	ZipArchive& operator = (const ZipArchive& other);
 
-    bool EnsureCentralDirectoryRead();
-    bool ReadEndOfCentralDirectory();
-    bool SeekToSignature(uint32_t signature, SeekDirection direction);
+	enum class SeekDirection
+	{
+		Forward,
+		Backward
+	};
 
-    void InternalDestroy();
+	bool EnsureCentralDirectoryRead();
+	bool ReadEndOfCentralDirectory();
+	bool SeekToSignature(uint32_t signature, SeekDirection direction);
 
-    detail::EndOfCentralDirectoryBlock _endOfCentralDirectoryBlock;
-    std::vector<ZipArchiveEntry::Ptr> _entries;
-    std::istream* _zipStream;
-    bool _owningStream;
+	void InternalDestroy();
+
+	detail::EndOfCentralDirectoryBlock _endOfCentralDirectoryBlock;
+	std::vector<ZipArchiveEntry::Ptr> _entries;
+	std::istream* _zipStream;
+	bool _owningStream;
 };
